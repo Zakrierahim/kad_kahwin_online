@@ -14,7 +14,7 @@ class DashboardController extends Controller
     {
         $weddings = Wedding::query()
             ->selectRaw('COUNT(*) as total')
-            ->selectRaw('COALESCE(SUM(CASE WHEN is_active = 1 THEN 1 ELSE 0 END), 0) as active')
+            ->selectRaw('COALESCE(SUM(CASE WHEN is_active THEN 1 ELSE 0 END), 0) as active')
             ->first();
 
         $rsvp = Rsvp::query()
