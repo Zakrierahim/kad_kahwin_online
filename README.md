@@ -102,6 +102,12 @@ Skrip memasang Nginx, PHP 8.3, MySQL dan Node, kemudian menjalankan migrasi. `AP
 
 Jika repositori ini peribadi, clone dengan token GitHub sebelum menjalankan skrip. Jangan masukkan kata laluan ke dalam git.
 
+## Render
+
+Render menjalankan imej Docker dalam repositori ini. Pangkalan data percuma ialah PostgreSQL dan tamat selepas 30 hari. Laman percuma tidur selepas 15 minit tanpa pelawat. Gambar dan fail muzik yang dimuat naik hilang bila pelayan dimulakan semula. Pautan YouTube dan data dalam pangkalan data kekal.
+
+Pilih branch `features` semasa mencipta Web Service. Tetapkan `APP_ENV=production` supaya seeder hanya mencipta akaun pentadbir.
+
 ## Ujian
 
 ```bash
