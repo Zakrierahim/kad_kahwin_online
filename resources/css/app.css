@@ -1,0 +1,226 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../../resources/views/**/*.blade.php';
+@source '../../resources/js/**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-inv-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --font-inv-sans: 'Nunito Sans', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-inv-script: 'Great Vibes', 'Cormorant Garamond', cursive;
+}
+
+@layer components {
+    .field {
+        @apply mt-1 w-full rounded-xl border border-stone-200 bg-white px-3 py-2.5 text-sm text-stone-900 shadow-sm outline-none transition focus:border-amber-800/40 focus:ring-2 focus:ring-amber-800/15;
+    }
+
+    .label {
+        @apply block text-sm font-medium text-stone-700;
+    }
+
+    .btn {
+        @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-60;
+    }
+
+    .btn-primary {
+        @apply bg-stone-900 text-white hover:bg-stone-800;
+    }
+
+    .btn-secondary {
+        @apply border border-stone-200 bg-white text-stone-800 hover:bg-stone-50;
+    }
+
+    .btn-danger {
+        @apply border border-red-200 bg-white text-red-700 hover:bg-red-50;
+    }
+
+    .btn-gold {
+        @apply text-white;
+        background: var(--inv-primary, #b08d57);
+    }
+
+    .card {
+        @apply rounded-2xl bg-white p-5 shadow-sm ring-1 ring-stone-200/80;
+    }
+
+    .badge {
+        @apply inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold;
+    }
+
+    .badge-aktif {
+        @apply bg-emerald-50 text-emerald-800;
+    }
+
+    .badge-tidak {
+        @apply bg-stone-100 text-stone-600;
+    }
+}
+
+.font-inv-serif { font-family: var(--font-inv-serif); }
+.font-inv-sans { font-family: var(--font-inv-sans); }
+.font-inv-script { font-family: var(--font-inv-script); }
+
+.invitation-shell {
+    background: #e8ddd2;
+}
+
+.invitation-card {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background: #fbf8f4;
+}
+
+.paper-edge {
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.paper-edge-top {
+    position: relative;
+    z-index: 1;
+    aspect-ratio: 682 / 200;
+    margin-bottom: -3.25rem;
+    background-image: url('/images/kad-paper-top.jpg');
+    -webkit-mask-image: linear-gradient(#000 0 70%, transparent);
+    mask-image: linear-gradient(#000 0 70%, transparent);
+}
+
+.paper-edge-bottom {
+    position: relative;
+    z-index: 1;
+    aspect-ratio: 682 / 200;
+    margin-top: -3.25rem;
+    background-image: url('/images/kad-paper-bottom.jpg');
+    -webkit-mask-image: linear-gradient(transparent, #000 30%);
+    mask-image: linear-gradient(transparent, #000 30%);
+}
+
+.bismillah {
+    font-size: clamp(2.05rem, 9.2vw, 3.5rem);
+    line-height: 1.15;
+}
+
+.paper-body {
+    flex: 1;
+    background-color: #fbf6f1;
+    background-image:
+        radial-gradient(ellipse at 50% 12%, rgba(226, 198, 184, 0.45), transparent 46%),
+        radial-gradient(ellipse at 62% 86%, rgba(228, 204, 188, 0.4), transparent 40%);
+    padding: 2.4rem 1.85rem 3.4rem;
+    color: #3f332c;
+}
+
+.paper-body .text-stone-500 {
+    color: #6a564c;
+}
+
+.paper-body .text-stone-600 {
+    color: #5a463c;
+}
+
+.paper-body [class*='--inv-primary'] {
+    color: color-mix(in srgb, var(--inv-primary) 46%, #241910);
+}
+
+.paper-panel {
+    border: 1px solid rgba(168, 132, 132, 0.28);
+    background: rgba(255, 252, 248, 0.55);
+}
+
+.ornament-rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    margin: 1.85rem 0;
+    color: #a68484;
+}
+
+.ornament-rule span {
+    width: 4.25rem;
+    height: 6px;
+    border-top: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+}
+
+.invitation-card .field {
+    border-radius: 0.3rem;
+    border-color: rgba(166, 132, 132, 0.38);
+    background: rgba(255, 253, 250, 0.82);
+}
+
+.invitation-card .btn-gold,
+.invitation-card .btn-secondary {
+    border: 1px solid color-mix(in srgb, var(--inv-primary) 50%, #c4a4a4);
+    background: transparent;
+    color: var(--inv-primary);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+}
+
+.invitation-card .btn-gold:hover,
+.invitation-card .btn-secondary:hover {
+    background: var(--inv-primary);
+    color: #fffaf6;
+}
+
+.cover-frame {
+    border: 1px solid rgba(168, 132, 132, 0.55);
+    background: rgba(255, 252, 248, 0.65);
+    padding: 0.45rem;
+}
+
+@media (min-width: 640px) {
+    .invitation-card {
+        min-height: 0;
+    }
+}
+
+.floral-songket .songket-frame {
+    background-image: repeating-linear-gradient(
+        45deg,
+        color-mix(in srgb, var(--inv-primary) 18%, transparent) 0 8px,
+        transparent 8px 16px
+    );
+}
+
+.youtube-audio {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.music-toggle[data-state='playing'] {
+    box-shadow: 0 10px 30px color-mix(in srgb, var(--inv-primary) 35%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .rise {
+        animation: rise 700ms ease both;
+    }
+
+    .music-toggle[data-state='playing'] .music-disc {
+        animation: spin 4s linear infinite;
+    }
+}
+
+@keyframes rise {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: none; }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}

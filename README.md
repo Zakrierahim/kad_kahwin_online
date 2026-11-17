@@ -1,0 +1,97 @@
+# Kad Kahwin Digital
+
+Platform hos jemputan perkahwinan digital untuk Malaysia. Satu aplikasi dan satu domain menempatkan semua pasangan. Setiap majlis mempunyai URL sendiri, reka bentuk sendiri, RSVP, dan buku ucapan.
+
+Contoh:
+
+- `https://domain-anda.com/ali-dan-fatimah`
+- `https://domain-anda.com/syedsaidyestosakinah`
+
+Hanya pentadbir platform yang log masuk. Pasangan dan tetamu tidak memerlukan akaun.
+
+## Keperluan
+
+- PHP 8.3 atau lebih baharu
+- Composer
+- Node.js dan npm
+- MySQL
+
+Projek ini menggunakan Laravel 13, Blade, Tailwind CSS, dan JavaScript biasa.
+
+## Pemasangan
+
+```bash
+composer install
+cp .env.example .env
+php artisan key:generate
+```
+
+Cipta pangkalan data MySQL, kemudian isi `DB_*` dalam `.env`.
+
+```bash
+php artisan migrate
+php artisan storage:link
+npm install
+npm run build
+php artisan serve
+```
+
+Aplikasi tempatan dibuka di `http://127.0.0.1:8000`.
+
+## Akaun pentadbir
+
+Tiada pendaftaran awam. Akaun dicipta melalui seeder, bukan ditulis dalam kod.
+
+Dalam `.env`:
+
+```env
+ADMIN_NAME=Pentadbir
+ADMIN_EMAIL=admin@domain-anda.com
+ADMIN_PASSWORD=kata-laluan-sekurang-kurangnya-8-aksara
+```
+
+Kemudian:
+
+```bash
+php artisan db:seed
+```
+
+Log masuk di `/admin/login`.
+
+`db:seed` tidak menukar kata laluan akaun yang sudah wujud. Data contoh majlis hanya dimasukkan apabila `APP_ENV=local`, dan rekod sedia ada tidak ditulis semula.
+
+## Apa yang boleh diurus
+
+Dari papan pemuka `/admin`:
+
+- Cipta, sunting, aktifkan, dan padam kad kahwin.
+- Pilih tema, warna, tipografi, dan hiasan.
+- Muat naik gambar muka depan dan muzik, atau tampal pautan YouTube.
+- Tetapkan hashtag majlis, contoh `#imandalamsyifa`.
+- Lihat RSVP, eksport CSV, dan padam ucapan.
+
+Tetamu membuka URL slug untuk melihat jemputan, peta, Waze, WhatsApp keluarga, borang kehadiran, dan buku ucapan. Jemputan yang tidak aktif tidak dipaparkan.
+
+## Muzik dan muat naik
+
+Pautan YouTube dimainkan melalui pemain YouTube selepas tetamu mengetik halaman. Fail audio terus (MP3, WAV, OGG, M4A) menggunakan pemain HTML.
+
+Had muat naik mengikut tetapan PHP `upload_max_filesize` dan `post_max_size`. Pada mesin pembangunan semasa, hadnya 2MB.
+
+## Pengeluaran
+
+Sebelum dibuka kepada umum:
+
+- Tetapkan `APP_ENV=production` dan `APP_DEBUG=false`.
+- Tetapkan `APP_URL` kepada domain sebenar.
+- Guna kata laluan pentadbir yang baharu.
+- Jalankan `npm run build` dan `php artisan storage:link`.
+- Jangan jalankan data contoh pada pelayan pengeluaran.
+
+## Ujian
+
+```bash
+php artisan test
+```
+
+Ujian menggunakan SQLite dalam memori dan tidak menyentuh pangkalan data MySQL.
