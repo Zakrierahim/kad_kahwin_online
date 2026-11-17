@@ -78,15 +78,29 @@ Pautan YouTube dimainkan melalui pemain YouTube selepas tetamu mengetik halaman.
 
 Had muat naik mengikut tetapan PHP `upload_max_filesize` dan `post_max_size`. Pada mesin pembangunan semasa, hadnya 2MB.
 
-## Pengeluaran
+## Pengeluaran di Oracle Cloud
 
-Sebelum dibuka kepada umum:
+Cipta VM Always Free:
 
-- Tetapkan `APP_ENV=production` dan `APP_DEBUG=false`.
-- Tetapkan `APP_URL` kepada domain sebenar.
-- Guna kata laluan pentadbir yang baharu.
-- Jalankan `npm run build` dan `php artisan storage:link`.
-- Jangan jalankan data contoh pada pelayan pengeluaran.
+1. Compute, Instances, Create instance.
+2. Imej Ubuntu 24.04.
+3. Shape `VM.Standard.A1.Flex` dengan 1 OCPU dan 6 GB RAM. Jika kapasiti penuh, pilih `VM.Standard.E2.1.Micro`.
+4. Pastikan IPv4 awam dihidupkan dan muat turun kunci SSH.
+5. Pada senarai keselamatan VCN, benarkan TCP 80 dan TCP 443 dari `0.0.0.0/0`. Port 22 sudah dibuka.
+
+Kemudian dari komputer anda:
+
+```bash
+ssh -i kunci-oracle.key ubuntu@IP-AWAM
+sudo apt-get update && sudo apt-get install -y git
+git clone https://github.com/Zakrierahim/kad_kahwin_online.git
+cd kad_kahwin_online
+sudo bash deploy/oracle/setup.sh
+```
+
+Skrip memasang Nginx, PHP 8.3, MySQL dan Node, kemudian menjalankan migrasi. `APP_ENV=production` menyebabkan seeder mencipta akaun pentadbir sahaja. Majlis contoh tidak dimasukkan.
+
+Jika repositori ini peribadi, clone dengan token GitHub sebelum menjalankan skrip. Jangan masukkan kata laluan ke dalam git.
 
 ## Ujian
 
