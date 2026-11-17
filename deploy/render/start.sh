@@ -1,6 +1,9 @@
 #!/bin/sh
 set -eu
 
+export LOG_CHANNEL=stderr
+export LOG_LEVEL="${LOG_LEVEL:-error}"
+
 if [ -n "${DATABASE_URL:-}" ]; then
     export DB_CONNECTION=pgsql
     export DB_URL="$(printf '%s' "$DATABASE_URL" | sed 's#^postgres://#pgsql://#; s#^postgresql://#pgsql://#')"
